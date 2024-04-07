@@ -13,7 +13,7 @@ interface NewsItem {
 
 const News: React.FC = () => {
   const {data, isloading, error} = useFetch<NewsItem>(
-    'https://raw.githubusercontent.com/ShevchukSasha/MobileLabs01/main/data/news.json',
+    'https://raw.githubusercontent.com/ShevchukSasha/MobileLabs02/main/data/news.json'
   );
   console.log(data);
   return (
@@ -27,7 +27,7 @@ const News: React.FC = () => {
               title={item.title}
               description={item.description}
               date={item.date}
-              img={`https://raw.githubusercontent.com/ShevchukSasha/MobileLabs01/main/data/${item.image}`}
+              img={`https://raw.githubusercontent.com/ShevchukSasha/MobileLabs02/main/data/${item.image}`}
             />
           </View>
         );

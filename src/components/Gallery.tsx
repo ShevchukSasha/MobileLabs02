@@ -5,8 +5,7 @@ import useFetch from '../hook/useFetch';
 
 const GalleryScreen = () => {
   const {data, isloading, error} = useFetch<string>(
-    'https://raw.githubusercontent.com/ShevchukSasha/MobileLabs01/main/data/news.json?token=GHSAT0AAAAAACPEU5ILFULOXD5EIN2NBYA6ZQSUC7A',
-    
+    'https://api.github.com/repos/ShevchukSasha/MobileLabs02/contents/data/images',    
     'images',
   );
 
