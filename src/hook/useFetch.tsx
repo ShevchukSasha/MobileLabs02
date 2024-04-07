@@ -1,8 +1,8 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
 type FetchDataType<T> = {
   data: T[];
-  isloading: boolean;
+  isLoading: boolean;
   error: string | null;
 };
 
@@ -13,29 +13,20 @@ const useFetch = <T,>(
   type: FetchType = 'json',
 ): FetchDataType<T> => {
   const [data, setData] = useState<T[]>([]);
-  const [isloading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(url);
+        const json = await response.json();
 
         if (type === 'json') {
-          const jsonData = await response.json();
-          setData(jsonData);
+          setData(json);
         } else if (type === 'images') {
-          const json = await response.json();
-
-          const imageFiles = json.filter((file: any) =>
-            file.name.match(/\.(jpg|jpeg|png|gif)$/i),
-          );
-
-          const images = imageFiles.map((imageFile: any) => {
-            const imageUrl = imageFile.download_url;
-
-            return imageUrl;
-          });
+          const images = json.filter((file: any) => file.type === 'file' && /\.(jpg|jpeg|png|gif)$/i.test(file.name))
+            .map((imageFile: any) => imageFile.download_url);
 
           setData(images);
         }
@@ -50,7 +41,7 @@ const useFetch = <T,>(
     fetchData();
   }, [url, type]);
 
-  return {data, isloading, error};
+  return { data, isLoading, error };
 };
 
 export default useFetch;

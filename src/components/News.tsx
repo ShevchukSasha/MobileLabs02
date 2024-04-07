@@ -12,13 +12,13 @@ interface NewsItem {
 }
 
 const News: React.FC = () => {
-  const {data, isloading, error} = useFetch<NewsItem>(
+  const {data, isLoading, error} = useFetch<NewsItem>(
     'https://raw.githubusercontent.com/ShevchukSasha/MobileLabs02/main/data/news.json'
   );
   console.log(data);
   return (
     <ScrollView>
-      {isloading && <Text>Loading...</Text>}
+      {isLoading && <Text>Loading...</Text>}
       {error && <Text>{error}</Text>}
       {data.map((item, index) => {
         return (
